@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     public Text CherryNum;
 
-    public bool isGround, isJump, isCrouch;
+    public bool isGround, isJump, isCrouch, isHurt;
 
     bool jumpPressed;
     int jumpcount;
@@ -54,7 +54,10 @@ public class PlayerController : MonoBehaviour
     {
         isGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
 
-        GroundMovement();
+        if (!isHurt)
+        {
+            GroundMovement();
+        }
 
         Jump();
 
@@ -136,8 +139,19 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("crouching", false);
         }
+
+        if (isHurt)
+        {
+            anim.SetBool("hurting", true);
+            if (Mathf.Abs(rb.velocity.x) < 0.1f)
+            {
+                anim.SetBool("hurting", false);
+                isHurt = false;
+            }
+        }
     }
 
+    //收集物品
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Collection" && collision.isActiveAndEnabled)
@@ -146,5 +160,29 @@ public class PlayerController : MonoBehaviour
             Cherry += 1;
             CherryNum.text = Cherry.ToString();
         }
+    }
+
+    //消灭敌人
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (anim.GetBool("falling"))
+            {
+                Destroy(collision.gameObject);
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
+            else if (transform.position.x < collision.gameObject.transform.position.x)
+            {
+                rb.velocity = new Vector2(-10, rb.velocity.y);
+                isHurt = true;
+            }
+            else if (transform.position.x > collision.gameObject.transform.position.x)
+            {
+                rb.velocity = new Vector2(10, rb.velocity.y);
+                isHurt = true;
+            }
+        }
+
     }
 }

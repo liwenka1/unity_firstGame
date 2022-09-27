@@ -188,8 +188,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   Cherry: 0
+  CherryNum: {fileID: 0}
   isGround: 0
   isJump: 0
+  isCrouch: 0
+  isHurt: 0
 --- !u!95 &7233491373070851488
 Animator:
   serializedVersion: 4
