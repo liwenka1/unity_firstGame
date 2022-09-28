@@ -126,6 +126,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (rb.velocity.y < 0)
         {
+            anim.SetFloat("running", 0);
             anim.SetBool("jumping", false);
             anim.SetBool("falling", true);
         }
