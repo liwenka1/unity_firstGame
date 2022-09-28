@@ -45,8 +45,9 @@ public class Enemy_Frog : MonoBehaviour
                 anim.SetBool("jumping", true);
                 rb.velocity = new Vector2(-Speed, JumpForce);
             }
-            if (transform.position.x < leftx)
+            if (transform.position.x <= leftx)
             {
+                rb.velocity = new Vector2(Speed, rb.velocity.y);
                 transform.localScale = new Vector3(-1, 1, 1);
                 Faceleft = false;
             }
@@ -58,8 +59,9 @@ public class Enemy_Frog : MonoBehaviour
                 anim.SetBool("jumping", true);
                 rb.velocity = new Vector2(Speed, JumpForce);
             }
-            if (transform.position.x > rightx)
+            if (transform.position.x >= rightx)
             {
+                rb.velocity = new Vector2(-Speed, rb.velocity.y);
                 transform.localScale = new Vector3(1, 1, 1);
                 Faceleft = true;
             }
