@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private Collider2D coll;
-
+    public AudioSource jumpAudio,hurtAudio,cherryAuido;
     public float speed, jumpForce;
     private float horizontalMove;
     public Transform groundCheck;
@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour
         else if (!isGround && rb.velocity.y > 0)
         {
             anim.SetBool("jumping", true);
+            jumpAudio.Play();
         }
         else if (rb.velocity.y < 0)
         {
@@ -157,6 +158,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "Collection" && collision.isActiveAndEnabled)
         {
+            cherryAuido.Play();
             Destroy(collision.gameObject);
             Cherry += 1;
             CherryNum.text = Cherry.ToString();
@@ -177,11 +179,13 @@ public class PlayerController : MonoBehaviour
             else if (transform.position.x < collision.gameObject.transform.position.x)
             {
                 rb.velocity = new Vector2(-10, rb.velocity.y);
+                hurtAudio.Play();
                 isHurt = true;
             }
             else if (transform.position.x > collision.gameObject.transform.position.x)
             {
                 rb.velocity = new Vector2(10, rb.velocity.y);
+                hurtAudio.Play();
                 isHurt = true;
             }
         }

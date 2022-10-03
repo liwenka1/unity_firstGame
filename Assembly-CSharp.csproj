@@ -58,9 +58,12 @@
   <ItemGroup>
     <Compile Include="Assets\Script\CameraControl.cs" />
     <Compile Include="Assets\Script\Enemy_Eagle.cs" />
+    <Compile Include="Assets\Script\Enemy.cs" />
     <Compile Include="Assets\Script\Enemy_Frog.cs" />
     <Compile Include="Assets\Script\PlayerController.cs" />
-    <Compile Include="Assets\Script\Enemy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\CasualGameBGM05\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
