@@ -8,16 +8,16 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private Collider2D coll;
-    public AudioSource jumpAudio,hurtAudio,cherryAuido;
+    public AudioSource jumpAudio, hurtAudio, cherryAuido;
     public float speed, jumpForce;
     private float horizontalMove;
-    public Transform groundCheck;
+    public Transform groundCheck, cellCheck;
     public LayerMask ground;
     public int Cherry;
 
     public Text CherryNum;
 
-    public bool isGround, isJump, isCrouch, isHurt;
+    public bool isGround, isCell, isJump, isCrouch, isHurt;
 
     bool jumpPressed;
     int jumpcount;
@@ -44,7 +44,8 @@ public class PlayerController : MonoBehaviour
         {
             isCrouch = true;
         }
-        else
+
+        if (!Input.GetKey(KeyCode.S) && !isCell)
         {
             isCrouch = false;
         }
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         isGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
+        isCell = Physics2D.OverlapCircle(cellCheck.position, 0.1f, ground);
 
         if (!isHurt)
         {

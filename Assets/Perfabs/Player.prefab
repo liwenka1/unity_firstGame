@@ -191,6 +191,7 @@ MonoBehaviour:
   speed: 5
   jumpForce: 10
   groundCheck: {fileID: 7427582185462514399}
+  cellCheck: {fileID: 466901753601787508}
   ground:
     serializedVersion: 2
     m_Bits: 256
